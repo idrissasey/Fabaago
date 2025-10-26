@@ -1,0 +1,58 @@
+<ion-item>
+    <ion-text color="medium" *ngIf="origin && destination">
+        📍 Départ : {{ formatCoordinate(origin.lat) }}, {{ formatCoordinate(origin.lng) }}<br />
+        🎯 Destination : {{ formatCoordinate(destination.lat) }}, {{ formatCoordinate(destination.lng) }}
+    </ion-text>
+</ion-item>
+
+
+<ion-item>
+    <ion-button expand="block" (click)="setCurrentLocationAsOrigin()">
+        Utiliser ma position actuelle
+    </ion-button>
+
+</ion-item>
+
+<ion-item>
+
+    <ion-button expand="block" (click)="clearSelection()">
+        Réinitialiser la sélection
+    </ion-button>
+</ion-item>
+
+
+<gmpx-api-loader
+        key="AIzaSyBydZmc6oxi_1y278fHjz5TVFhzSH_WzBw"
+        solution-channel="GMP_CCS_autocomplete_v5">
+</gmpx-api-loader>
+
+<gmp-map id="map" center="13.54079655783689,2.0869624614715576" zoom="15" map-id="AIzaSyBydZmc6oxi_1y278fHjz5TVFhzSH_WzBw">
+    <div slot="control-block-start-inline-start" class="pac-card" id="pac-card">
+        <div id="title">Recherche de lieu</div>
+
+        <div id="type-selector" class="pac-controls">
+            <input type="radio" name="type" id="changetype-all" checked />
+            <label for="changetype-all">Tous</label>
+
+            <input type="radio" name="type" id="changetype-establishment" />
+            <label for="changetype-establishment">Établissements</label>
+
+            <input type="radio" name="type" id="changetype-address" />
+            <label for="changetype-address">Adresse</label>
+
+            <input type="radio" name="type" id="changetype-geocode" />
+            <label for="changetype-geocode">Géocode</label>
+        </div>
+
+        <div id="strict-bounds-selector" class="pac-controls">
+            <input type="checkbox" id="use-strict-bounds" />
+            <label for="use-strict-bounds">Limiter à la carte</label>
+        </div>
+
+        <!-- ✅ Un seul champ pour gérer origine & destination -->
+        <gmpx-place-picker id="place-picker" for-map="map" placeholder="Rechercher un lieu..."></gmpx-place-picker>
+    </div>
+
+    <gmp-advanced-marker id="marker"></gmp-advanced-marker>
+</gmp-map>
+

@@ -1,0 +1,100 @@
+div {
+  text-align: center;
+}
+
+ion-input,
+ion-select,
+ion-checkbox,
+ion-label {
+  font-size: 16px;
+  color: #333;
+}
+
+ion-button {
+  --border-radius: 8px;
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  font-size: 16px;
+  margin-top: 12px;
+  text-transform: none;
+  font-weight: 500;
+  --background: linear-gradient(45deg, #FFA552, #00B488);
+  color: white;
+}
+
+ion-button[color="medium"] {
+  --background: linear-gradient(45deg, #FFA552, #007F91);
+}
+
+ion-button:disabled {
+  opacity: 0.6;
+}
+
+img {
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.image-upload-item,
+.image-preview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+ion-select::part(text) {
+  color: #333;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  width: 100%;
+}
+
+gmp-map {
+  display: block;
+  width:100vh;
+  height: 400px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.pac-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+}
+
+
+@media screen and (max-width: 480px) {
+  .form-container {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  ion-title {
+    font-size: 1.2rem;
+  }
+
+  ion-button {
+    font-size: 15px;
+  }
+
+  ion-input,
+  ion-label,
+  ion-select {
+    font-size: 15px;
+  }
+
+  img {
+    max-width: 80px;
+    height: 80px;
+  }
+}

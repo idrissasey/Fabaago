@@ -1,0 +1,7 @@
+{
+  "name": "Faabago",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

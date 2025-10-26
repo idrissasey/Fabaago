@@ -1,0 +1,73 @@
+<ion-content
+        [style.backgroundImage]="'url(' + backgroundImage + ')'"
+        [style.backgroundSize]="'cover'"
+        [style.backgroundPosition]="'center center'"
+        [style.backgroundRepeat]="'no-repeat'">
+
+    <div class="form-wrapper">
+
+        <!-- Form Container -->
+        <div class="form-container">
+
+            <!-- Search  -->
+            <ion-header>
+                <ion-toolbar>
+                    <ion-title>Profil</ion-title>
+                </ion-toolbar>
+            </ion-header>
+
+
+            <!-- Title -->
+            <ion-text color="secondary" class="ion-text-center">
+                <h2>Bienvenue sur SahelTaxIna </h2>
+                <p>Votre transport au seins de l'AES en toute sécurité : en Taxi & VTC Personnel</p>
+                <p>Veuillez entrer votre identifiant pour vous connecter.</p>
+            </ion-text>
+
+            <!-- Phone Input -->
+            <ion-item>
+                <ion-select [(ngModel)]="countryCode" interface="popover" placeholder="Indicatif">
+                    <ion-select-option *ngFor="let country of countryCodes; let i = index" [value]="country.code">
+                        {{ country.code }} ({{ country.label }})
+                    </ion-select-option>
+                </ion-select>
+                <ion-input [(ngModel)]="phone" placeholder="Numéro phone" type="tel" inputmode="numeric" pattern="[0-9]*" ></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-input [(ngModel)]="password" placeholder="Mot de passe" type="password"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Êtes-vous conducteur ?</ion-label>
+                <ion-checkbox slot="end" [(ngModel)]="isDriver" (ionChange)="onDriverChange()"></ion-checkbox>
+            </ion-item>
+
+            <ion-item *ngIf="isDriver">
+                <ion-label color="#FB4B4E"> <ion-icon name="warning"/> Attention vous allez vous inscrire comme chauffeur, votre profil sera verifier par nos administrateur <ion-icon name="people"/></ion-label>
+
+            </ion-item>
+
+            <ion-button expand="block" (click)="connexion()"> Connexion </ion-button>
+
+            <!-- Send Code
+            <ion-button expand="block" (click)="connexion()">Envoyer le code</ion-button>
+             OTP
+            <div *ngIf="confirm">
+                <ion-item>
+                    <ion-input [(ngModel)]="otp" placeholder="Entrer le code SMS" type="number"></ion-input>
+                </ion-item>
+                <ion-button expand="block" (click)="handleConfirmCode()">Valider le code</ion-button>
+            </div>  -->
+
+            <!-- Signup prompt -->
+            <ion-text color="secondary" class="ion-text-center">
+                Vous n'avez pas de compte ? <ion-icon name="car"></ion-icon>
+            </ion-text>
+            <ion-button expand="block" (click)="goToSubscribe()">S'inscrire</ion-button>
+        </div>
+
+        <!-- reCAPTCHA -->
+        <div #recaptchaContainer></div>
+    </div>
+</ion-content>

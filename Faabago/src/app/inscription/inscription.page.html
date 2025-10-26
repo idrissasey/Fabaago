@@ -1,0 +1,166 @@
+<ion-content
+        [fullscreen]="true"
+        class="ion-padding"
+        [style.backgroundImage]="'url(' + backgroundImage + ')'"
+        [style.backgroundSize]="'cover'"
+        scrollY="true"
+>
+    <div class="form-wrapper">
+        <ion-header>
+            <ion-toolbar>
+                <ion-title>Inscription</ion-title>
+            </ion-toolbar>
+        </ion-header>
+
+        <div *ngIf="!confirm" class="form-container ion-padding">
+            <!-- Infos de base -->
+            <ion-item>
+                <ion-input [(ngModel)]="name" placeholder="Nom"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input [(ngModel)]="surname" placeholder="Prénom"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input [(ngModel)]="dob" placeholder="Date de naissance format jj/mm/aaaa : 02/03/1998" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input [(ngModel)]="mail" placeholder="Email" inputmode="email"></ion-input>
+            </ion-item>
+
+
+
+
+            <!-- Téléphone -->
+            <ion-item>
+                <ion-select [(ngModel)]="countryCode" interface="popover" placeholder="Indicatif">
+                    <ion-select-option *ngFor="let country of countryCodes" [value]="country.code">
+                        {{ country.code }} ({{ country.label }})
+                    </ion-select-option>
+                </ion-select>
+                <ion-input [(ngModel)]="phone" placeholder="Téléphone" type="tel"></ion-input>
+                <ion-input [(ngModel)]="password" placeholder="Mot de passe" type="password"></ion-input>
+            </ion-item>
+
+            <!-- Position -->
+            <ion-item>
+                <ion-label>Quartier Adresse : Position actuelle lors de la création de votre compte</ion-label>
+                <ion-button expand="block" (click)="getCurrentPosition()">Obtenir ma position</ion-button>
+            </ion-item>
+            <ion-item *ngIf="currentPosition">
+                <ion-label>Latitude : {{ currentPosition.latitude }}</ion-label>
+                <ion-label>Longitude : {{ currentPosition.longitude }}</ion-label>
+            </ion-item>
+
+            <!-- Photo de profil -->
+            <ion-item>
+                <ion-label>Ajouter une photo</ion-label>
+                <ion-button expand="block" (click)="selectPicture()">Choisir une photo</ion-button>
+            </ion-item>
+            <ion-item *ngIf="selectedPicture">
+                <img [src]="selectedPicture" alt="Photo sélectionnée" style="width: 100%; max-width: 100px; height: 100px; object-fit: cover;" />
+            </ion-item>
+
+            <!-- Conducteur ? -->
+            <ion-item>
+                <ion-label>Êtes-vous conducteur ?</ion-label>
+                <ion-checkbox slot="end" [(ngModel)]="isDriver" (ionChange)="onDriverChange()"></ion-checkbox>
+            </ion-item>
+
+            <!-- Section Conducteur (fusionnée proprement) -->
+            <ion-item *ngIf="isDriver" lines="none" class="driver-section">
+
+
+                <!-- Climatiseur -->
+                <ion-item>
+                    <ion-label>Véhicule climatisé </ion-label>
+
+
+                    <ion-toggle slot="start" [(ngModel)]="isClimatised" color="primary">Véhicule Non Climatisé</ion-toggle>
+
+                </ion-item>
+
+                <!-- Infos véhicule -->
+
+                    <ion-label position="stacked">Nombre Sieges</ion-label>
+                    <ion-select [(ngModel)]="number_sit_taxi" placeholder="Places du véhicule">
+                        <ion-select-option *ngFor="let n of [1, 2, 3, 4]" [value]="n">{{ n }}</ion-select-option>
+                    </ion-select>
+
+
+                <ion-item>
+                    <ion-label position="stacked">Marque modèle</ion-label>
+                    <ion-input [(ngModel)]="marqueModel" placeholder="Ex: Toyota Yaris"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="stacked">Immatriculation</ion-label>
+                    <ion-input [(ngModel)]="immatriculation" placeholder="Ex: 1234AB05"></ion-input>
+                </ion-item>
+
+            </ion-item>
+
+            <!-- Type de conducteur -->
+                <ion-item *ngIf="isDriver"  class="image-upload-item">
+                    <ion-label>Type de conducteur</ion-label>
+                    <ion-select [(ngModel)]="userType" placeholder="Choisir un type">
+                        <ion-select-option value="classic">Taximan classique</ion-select-option>
+                        <ion-select-option value="private">Conducteur Particulier</ion-select-option>
+                    </ion-select>
+
+
+                    <!-- Permis de conduire -->
+                    <div class="upload-row">
+                        <ion-label class="upload-label">Photo Carte grise</ion-label>
+                        <ion-button (click)="selectCarteGrisePicture()">Charger</ion-button>
+                        <img *ngIf="carteGrisePicture" [src]="carteGrisePicture" alt="Permis" class="preview-img" />
+                    </div>
+                    <!-- Permis de conduire -->
+                    <div class="upload-row">
+                        <ion-label class="upload-label">Photo Permis</ion-label>
+                        <ion-button (click)="selectDriverLicencePicture()">Charger</ion-button>
+                        <img *ngIf="driverLicencePicture" [src]="driverLicencePicture" alt="Permis" class="preview-img" />
+                    </div>
+
+                    <!-- Véhicule avec immatriculation -->
+                    <div class="upload-row">
+                        <ion-label class="upload-label">Photo Véhicule (vue de face avec plaque visible)</ion-label>
+                        <ion-button (click)="selectVehiclePicture()">Charger</ion-button>
+                        <img *ngIf="vehiclePicture" [src]="vehiclePicture" alt="Véhicule" class="preview-img" />
+                    </div>
+                </ion-item>
+
+                <!-- Licence de taximan (si classic) -->
+                <ng-container *ngIf="userType === 'classic'">
+                    <div class="upload-row">
+                        <ion-label class="upload-label">Licence de taximan</ion-label>
+                        <ion-button (click)="selectTaximanLicencePicture()">Charger</ion-button>
+                        <img *ngIf="taximanLicencePicture" [src]="taximanLicencePicture" alt="Licence" class="preview-img" />
+
+
+                    </div>
+
+                    <ion-item style="margin-top: 10px;">
+                        <ion-input [(ngModel)]="taxiNumberOfficiel" placeholder="Numéro TAXI" type="number"></ion-input>
+                    </ion-item>
+                </ng-container>
+
+
+
+            <!-- Boutons finaux -->
+            <ion-button expand="block" color="success" (click)="handleInscription()">S'inscrire</ion-button>
+            <ion-button expand="block" color="danger" (click)="handleCancel()">Annuler</ion-button>
+        </div>
+
+        <!-- Confirmation OTP (si nécessaire) -->
+        <!--
+        <div *ngIf="confirm" class="form-container">
+          <ion-item>
+            <ion-input [(ngModel)]="otp" placeholder="Entrer le code SMS" type="number"></ion-input>
+          </ion-item>
+          <ion-button expand="block" (click)="handleInscriptionUsingOTP(true)">Valider le code</ion-button>
+        </div>
+        -->
+    </div>
+
+    <div #recaptchaContainer></div>
+</ion-content>

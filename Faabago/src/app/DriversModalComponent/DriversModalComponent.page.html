@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Recherche d’un chauffeur en cours</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="close()">Fermer</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content
+        [style.backgroundImage]="'url(' + backgroundImage + ')'"
+        [style.backgroundSize]="'cover'"
+        [style.backgroundPosition]="'center center'"
+        [style.backgroundRepeat]="'no-repeat'">
+    <div class="waiting-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 16px;">
+        <ion-spinner name="crescent" style="margin: 24px 0;"></ion-spinner>
+        <h2 style="text-align: center;">Merci de patienter pendant que nous recherchons un chauffeur pour vous&nbsp;!</h2>
+
+                <div class="waiting-info">
+                    <h2>Recherche de votre chauffeur</h2>
+                    <p>Mise en relation avec un chauffeur avant {{ deadlineTime }}</p>
+
+                    <ion-progress-bar [value]="progressValue" color="primary"></ion-progress-bar>
+
+                    <p class="timer">⏳ Temps restant : {{ remainingSeconds }}s</p>
+                </div>
+
+                <div class="ad-banner">
+                    <img [src]="currentAd?.image" alt="pub">
+                    <div class="ad-text">{{ currentAd?.text }}</div>
+                </div>
+
+                <ion-button (click)="disconect()">Deconnexion</ion-button>
+            </div>
+        </ion-content>
+

@@ -1,0 +1,138 @@
+<ion-content
+        [fullscreen]="true"
+        class="ion-padding"
+        [style.backgroundImage]="'url(' + backgroundImage + ')'"
+        [style.backgroundSize]="'cover'"
+        scrollY="true"
+>
+
+    <div class="form-wrapper">
+
+        <!-- Form Container -->
+        <div class="form-container">
+
+            <!-- Title -->
+            <ion-text color="secondary" class="ion-text-center">
+                <h2>SahelTaxIna souhaite la Bienvenue </h2>
+                <ion-title size="large">Tableau de bord du chauffeur {{ driverProfile.name }}   </ion-title>
+            </ion-text>
+
+            <div class="profile-picture">
+                <img [src]="driverProfile.picture && driverProfile.picture !== '' ? driverProfile.picture : profilDefaultImg" alt="Photo de profil" />
+            </div>
+          <ion-item>  <ion-label>Nom : {{ driverProfile.name }}</ion-label> </ion-item>
+          <ion-item>   <ion-label>Prénom : {{ driverProfile.last_name }}</ion-label>  </ion-item>
+            <ion-item>   <ion-label>Email : {{ driverProfile.email }}</ion-label> </ion-item>
+            <ion-item> <ion-label>Type : {{ driverProfile.type_user }}</ion-label> </ion-item>
+            <ion-item>  <ion-label>Téléphone : {{ driverProfile.tel_nita }}</ion-label> </ion-item>
+
+            <!-- Afficher les images si type_user est "Taximan classique" -->
+
+            <div *ngIf="driverProfile.type_user === 'classic'"   class="additional-pictures">
+                <div class="small-picture">
+                    <img [src]="driverProfile.taxi_licence" alt="Licence Taxi" />
+                </div>
+                <div class="small-picture">
+                    <img [src]="driverProfile.driver_licence" alt="Permis de conduire" />
+                </div>
+            </div>
+            <ng-template #addLicenceAndTaxiLicence>
+                <ng-container *ngIf="driverProfile.type_user === 'classic'; else addOnlyLicence">
+
+                    <ion-item>
+
+                        <ion-button expand="block" (click)="addTaxiLicenceF()">Ajouter la licence Taxi</ion-button>
+
+
+                        <ion-button expand="block" (click)="addLicenceF()">Ajouter le permis de conduire</ion-button>
+                    </ion-item>
+
+
+
+                    <ion-label >En  Tant que Taximan Votre compte est bloqué tant que la licence Taxi et le permis ne sont pas ajoutés. Vous ne recevrez pas de request.</ion-label>
+                </ng-container>
+                <ng-template #addOnlyLicence>
+                    <ion-button (click)="this.addLicenceF()">Ajouter le permis de conduire</ion-button>
+                    <ion-label>Votre compte est bloqué tant que le permis de conduire n'est pas ajouté. Vous ne recevrez pas de request.</ion-label>
+                </ng-template>
+            </ng-template>
+
+
+
+            <!-- Notifications *ngIf="(driverProfile.type_user === 'classic' && driverProfile.taxiLicencePicture && driverProfile.taxiLicencePicture !== '' && driverProfile.taxiLicencePicture !== null) || (driverProfile.type_user !== 'classic' && driverProfile.driverLicencePicture && driverProfile.driverLicencePicture !== '' && driverProfile.driverLicencePicture !== null)" -->
+            <ion-item >
+                <h2>Notifications</h2>
+                <div *ngIf="request.length > 0; else noNotifications">
+
+                    <ion-list *ngIf="request.length">
+                        <ion-item *ngFor="let req of request">
+                            <ion-label>
+                                <h3>{{ req.id }} Détails : {{ req.number_client }} destination {{ req.from }} - {{ req.to  }})</h3>
+                                <p>Distance : {{ req.distance | number: '1.1-2' }} km</p>
+                                <p>Prix estimé : {{ req.estimate_price_per_client  | currency:'XOF' }} + "F CFA"</p>
+                            </ion-label>
+
+                            <ion-item>
+
+                                    <ion-label>{{ req.message }}</ion-label>
+                                    <ion-button (click)="acceptNotification(req.id)">Accepter</ion-button>
+                                    <ion-button (click)="rejectNotification(req.id)">Rejeter</ion-button>
+
+                            </ion-item>
+
+                        </ion-item>
+
+                    </ion-list>
+
+
+                </div>
+                <ng-template #noNotifications>
+                    <ion-label>Aucune notification pour le moment.</ion-label>
+                </ng-template>
+            </ion-item>
+
+            <!-- Historique des courses -->
+            <ion-item>
+                <h2>Historique des courses</h2>
+                <ul>
+                    <li *ngFor="let ride of rideHistory">
+                        <ion-label>Course : {{ ride.from }} -> {{ ride.to }}</ion-label>
+                        <ion-label>Montant : {{ ride.fare }} €</ion-label>
+                    </li>
+                </ul>
+            </ion-item>
+        </div>
+        <!-- Gains totaux -->
+        <ion-item>
+            <h2>Gains totaux</h2>
+            <ion-label>{{ totalGain }} €</ion-label>
+        </ion-item>
+    </div>
+</ion-content>
+
+
+<!--ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Recherche de transport
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content-- [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"> Recherche de transport</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+    <ion-content>
+        <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+            <ion-fab-button>
+                <ion-icon name="camera"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+    </ion-content>
+
+  <app-explore-container name="Tab 2 page"></app-explore-container>
+</ion-content-->

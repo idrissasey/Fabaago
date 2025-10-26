@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Détails de la requête</h1>
+<div mat-dialog-content>
+    <p><strong>Origine :</strong> {{ data.from.latitude }}, {{ data.from.longitude }}</p>
+    <p><strong>Destination :</strong> {{ data.to.latitude }}, {{ data.to.longitude }}</p>
+    <p><strong>Distance estimée :</strong> {{ data.distance }} km</p>
+    <p><strong>Prix estimé :</strong> {{ data.estimated_price }} XAF</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="respond(true)">Accepter</button>
+    <button mat-button (click)="respond(false)">Refuser</button>
+</div>
+<ion-item>
+
+    <ion-button (click)="disconect()">Deconnexion</ion-button>
+</ion-item>

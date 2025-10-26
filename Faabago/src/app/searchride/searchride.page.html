@@ -1,0 +1,141 @@
+<ion-content
+        [fullscreen]="true"
+        class="ion-padding"
+        [style.backgroundImage]="'url(' + backgroundImage + ')'"
+        [style.backgroundSize]="'cover'"
+        scrollY="true"
+>
+
+    <div class="form-wrapper">
+
+
+        <!-- Form Container -->
+        <div class="form-container">
+
+
+            <!-- ======== HEADER PRINCIPAL ======== -->
+            <ion-header>
+                <ion-toolbar>
+                    <ion-title>Recherche de Chauffeurs</ion-title>
+                </ion-toolbar>
+            </ion-header>
+
+            <!-- Title -->
+            <ion-text color="secondary" class="ion-text-center">
+                <h2>Où voulez-vous partir aujourd'hui ? {{ userProfile.name }}</h2>
+                <ion-title size="large">Sélectionnez votre destination.</ion-title>
+                <ion-icon aria-hidden="true" name="car"></ion-icon>
+            </ion-text>
+
+            <!-- ======== BANNIÈRE IMAGE ======== -->
+            <div class="profile-picture">
+                <img [src]="banniereVoiture" alt="Bannière" class="banner-image"  />
+            </div>
+
+
+
+            <!-- ======== SÉLECTEURS DE TRAJET ======== -->
+            <ion-item>
+                <ion-label>Départ (quartier)</ion-label>
+                <ion-select
+                        [(ngModel)]="selectedOriginFromList"
+                        (ionChange)="onQuartierSelected('origin', selectedOriginFromList)"
+                >
+                    <ion-select-option *ngFor="let loc of locations" [value]="loc.coords">
+                        {{ loc.name + ' ' + loc.arrondissement }}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Destination (quartier)</ion-label>
+                <ion-select
+                        [(ngModel)]="selectedDestinationFromList"
+                        (ionChange)="onQuartierSelected('destination', selectedDestinationFromList)"
+                >
+                    <ion-select-option *ngFor="let loc of locations" [value]="loc.coords">
+                        {{ loc.name + ' ' + loc.arrondissement }}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <app-map-picker
+                        (originSelected)="onOriginSelected($event)"
+                        (destinationSelected)="onDestinationSelected($event)"
+                        #mapPicker
+                ></app-map-picker>
+            </ion-item>
+
+
+            <ion-item>
+                <ion-label position="stacked">Nombre de clients</ion-label>
+                <ion-select
+                        [(ngModel)]="number_client"
+                        placeholder="Sélectionnez le nombre de clients"
+                >
+                    <ion-select-option *ngFor="let n of [1, 2, 3, 4]" [value]="n">
+                        {{ n }}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Commentaire sur la zone de départ</ion-label>
+                <ion-textarea
+                        [(ngModel)]="departureComment"
+                        placeholder="Exemple : Pharmacie Recasement"
+                ></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Commentaire sur la zone d'arrivée</ion-label>
+                <ion-textarea
+                        [(ngModel)]="arrivalComment"
+                        placeholder="Exemple : Hôpital de Référence"
+                ></ion-textarea>
+            </ion-item>
+
+            <!-- Search🔽 Sélecteurs par liste -->
+
+            <ion-button
+                    expand="block"
+                    (click)="search(selectedOriginFromList, selectedDestinationFromList)"
+            >
+                Rechercher des chauffeurs
+            </ion-button>
+
+
+
+            <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+
+            <ion-list *ngIf="driversResults.length">
+                <ion-item *ngFor="let d of driversResults">
+                    <ion-label>
+                        <h3>{{ d.driver.name }}</h3>
+                        <p>Distance : {{ d.rideDistance | number: '1.1-2' }} km</p>
+                        <p>Prix estimé : {{ d.estimatedPrice | currency: 'XOF' }} F CFA</p>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+
+            <p *ngIf="!loading && !driversResults.length">
+                Aucun chauffeur trouvé 😞
+            </p>
+
+            <!-- ======== SECTION GOOGLE MAPS ======== -->
+
+            <ion-button expand="block"  (click)="disconect()">
+                Déconnexion
+            </ion-button>
+
+            <!-- ======== TITRE ET INTRO ======== -->
+            <ion-button expand="block" (click)="openHelpModal()">Comment ça marche ?</ion-button>
+
+
+            <ion-button expand="block" (click)="seedData()">Seed Firestore</ion-button>
+
+
+        </div>
+    </div>
+</ion-content>

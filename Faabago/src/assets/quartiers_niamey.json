@@ -1,0 +1,122 @@
+[
+    {
+        "name": "Bobiel",
+        "arrondissement": "Niamey I",
+        "lat": 13.54,
+        "lng": 2.12
+    },
+    {
+        "name": "Cit\u00e9 Chinoise",
+        "arrondissement": "Niamey I",
+        "lat": 13.532,
+        "lng": 2.11
+    },
+    {
+        "name": "Cit\u00e9 Francophonie",
+        "arrondissement": "Niamey I",
+        "lat": 13.53,
+        "lng": 2.112
+    },
+    {
+        "name": "Koira Kano",
+        "arrondissement": "Niamey I",
+        "lat": 13.529,
+        "lng": 2.107
+    },
+    {
+        "name": "Goudel",
+        "arrondissement": "Niamey I",
+        "lat": 13.48,
+        "lng": 2.12
+    },
+    {
+        "name": "Koubia",
+        "arrondissement": "Niamey I",
+        "lat": 13.533,
+        "lng": 2.115
+    },
+    {
+        "name": "Yantala Haut",
+        "arrondissement": "Niamey I",
+        "lat": 13.55,
+        "lng": 2.11
+    },
+    {
+        "name": "Yantala Bas",
+        "arrondissement": "Niamey I",
+        "lat": 13.545,
+        "lng": 2.11
+    },
+    {
+        "name": "Plateau I",
+        "arrondissement": "Niamey I",
+        "lat": 13.535,
+        "lng": 2.105
+    },
+    {
+        "name": "Riyad",
+        "arrondissement": "Niamey I",
+        "lat": 13.532,
+        "lng": 2.108
+    },
+    {
+        "name": "Sabara",
+        "arrondissement": "Niamey I",
+        "lat": 13.526,
+        "lng": 2.112
+    },
+    {
+        "name": "A\u00e9roport I",
+        "arrondissement": "Niamey IV",
+        "lat": 13.48,
+        "lng": 2.133
+    },
+    {
+        "name": "A\u00e9roport II",
+        "arrondissement": "Niamey IV",
+        "lat": 13.479,
+        "lng": 2.14
+    },
+    {
+        "name": "Saga Goungou",
+        "arrondissement": "Niamey IV",
+        "lat": 13.47,
+        "lng": 2.14
+    },
+    {
+        "name": "Talladj\u00e9",
+        "arrondissement": "Niamey IV",
+        "lat": 13.46,
+        "lng": 2.12
+    },
+    {
+        "name": "Pays Bas I",
+        "arrondissement": "Niamey IV",
+        "lat": 13.46,
+        "lng": 2.135
+    },
+    {
+        "name": "Pays Bas II",
+        "arrondissement": "Niamey IV",
+        "lat": 13.458,
+        "lng": 2.137
+    },
+    {
+        "name": "Kalley Centre",
+        "arrondissement": "Niamey III",
+        "lat": 13.51,
+        "lng": 2.105
+    },
+    {
+        "name": "Madina",
+        "arrondissement": "Niamey III",
+        "lat": 13.52,
+        "lng": 2.09
+    },
+    {
+        "name": "Banizoumbou",
+        "arrondissement": "Niamey III",
+        "lat": 13.5,
+        "lng": 2.14
+    }
+]

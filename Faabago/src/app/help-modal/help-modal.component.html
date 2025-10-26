@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Aide</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="close()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <img
+            class="banner-image"
+            [src]="helpImg"
+            alt="Étapes à suivre"
+            (click)="openFullScreen()"
+    />
+
+    <p>
+        Suivez les étapes ci-dessous pour effectuer votre recherche de trajet.
+    </p>
+
+    <video width="100%" controls style="border-radius:8px;">
+        <source src="assets/videos/aide.mp4" type="video/mp4" />
+        Votre navigateur ne supporte pas la vidéo.
+    </video>
+</ion-content>

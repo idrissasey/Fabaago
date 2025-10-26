@@ -1,0 +1,45 @@
+<ion-content class="user-dashboard"
+
+             [style.backgroundImage]="'url(' + backgroundImage + ')'"
+             [style.backgroundSize]="'cover'"
+             [style.backgroundPosition]="'center center'"
+             [style.backgroundRepeat]="'no-repeat'">
+
+    <div class="form-wrapper">
+
+        <!-- Form Container -->
+        <div class="form-container">
+
+
+    <h1>Tableau de bord de l'utilisateur</h1>
+
+    <!-- Profil de l'utilisateur -->
+
+            <div class="profile-picture">
+                <img [src]="userProfile.picture" alt="Photo de profil" />
+            </div>
+            <ion-label>Nom : {{ userProfile.name }}</ion-label>
+            <ion-label>Prénom : {{ userProfile.surname }}</ion-label>
+            <ion-label>Email : {{ userProfile.email }}</ion-label>
+            <ion-label>Type : {{ userProfile.type_user }}</ion-label>
+            <ion-label>Téléphone : {{ userProfile.tel_nita }}</ion-label>
+
+        </div>
+
+        <ion-item>
+
+            <ion-button (click)="disconect()">Deconnexion</ion-button>
+        </ion-item>
+    </div>
+
+        <!--app-searchride--app-searchride-->
+
+
+
+    <!-- Recherche des course -->
+
+
+
+
+
+</ion-content>

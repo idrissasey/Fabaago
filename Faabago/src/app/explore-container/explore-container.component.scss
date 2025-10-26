@@ -1,0 +1,109 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+
+ion-input,
+ion-select,
+ion-checkbox,
+ion-label {
+  font-size: 16px;
+  color: #333;
+}
+
+ion-button {
+  --border-radius: 8px;
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  font-size: 16px;
+  margin-top: 12px;
+  text-transform: none;
+  font-weight: 500;
+  --background: linear-gradient(45deg, #FFA552, #00B488);
+  color: white;
+}
+
+ion-button[color="medium"] {
+  --background: linear-gradient(45deg, #FFA552, #007F91);
+}
+
+ion-button:disabled {
+  opacity: 0.6;
+}
+
+img {
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.image-upload-item,
+.image-preview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+ion-select::part(text) {
+  color: #333;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  width: 100%;
+}
+
+@media screen and (max-width: 480px) {
+  .form-container {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  ion-title {
+    font-size: 1.2rem;
+  }
+
+  ion-button {
+    font-size: 15px;
+  }
+
+  ion-input,
+  ion-label,
+  ion-select {
+    font-size: 15px;
+  }
+
+  img {
+    max-width: 80px;
+    height: 80px;
+  }
+}
